@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>간단하게 주문하기 · Sara Kim Gallery</title>
+<title>빠른 주문 · Sara Kim Gallery</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="AI 이미지 콘테스트 입선 작가 김사라가 당신의 이야기로 단 하나의 그림을 1:1로 제작합니다.">
 <meta property="og:title" content="당신만을 위한 단 하나의 그림 · Sara Kim">
@@ -244,8 +244,8 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
 
 <section class="order" id="order" style="padding-top:clamp(110px,15vh,150px)">
   <div class="wrap">
-    <div class="head rv"><h2>Quick <i style="font-style:italic">order</i></h2><span class="label">간단하게 주문하기 · 약 2분</span></div>
-    <p class="intro rv">꼭 필요한 것만 물어볼게요. 나머지는 작가가 직접 연락드려 함께 채워갑니다. 더 자세히 쓰고 싶다면 <a href="/gallery/order/" style="color:var(--silver-hi);border-bottom:1px solid #555">세밀하게 주문하기</a>로 가세요.</p>
+    <div class="head rv"><h2>Quick <i style="font-style:italic">order</i></h2><span class="label">빠른 주문 · 약 2분</span></div>
+    <p class="intro rv">꼭 필요한 것만 물어볼게요. 나머지는 작가가 직접 연락드려 함께 채워갑니다. 더 자세히 쓰고 싶다면 <a href="/gallery/order/" style="color:var(--silver-hi);border-bottom:1px solid #555">세밀하게 주문</a>로 가세요.</p>
     <form id="orderForm" class="rv" novalidate>
       <p class="step-t full">01 · 누구를 위한 그림</p>
       <fieldset class="f full"><legend>누구를 위한 그림인가요? <em>*</em></legend>
@@ -370,9 +370,9 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
     $('#promptOut').textContent=o.prompt;$('#preview').hidden=false;
     let ok=false;
     try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-      body:JSON.stringify({_subject:`[새 주문·간단 ${oid}] ${v('name')}님 · ${prod.name} · ${won(prod.price)}원`,_template:'box',_captcha:'false',
+      body:JSON.stringify({_subject:`[새 주문·빠른 ${oid}] ${v('name')}님 · ${prod.name} · ${won(prod.price)}원`,_template:'box',_captcha:'false',
         주문번호:oid,주문자:v('name'),연락처:v('contact'),상품:`${prod.name} (${prod.size}) + 작품 캡션 2장`,금액:won(prod.price)+'원',
-        희망수령일:v('date')||'-',배송지:v('addr'),주문방식:'간단 주문',결제:'계좌이체 (입금 대기)',AI프롬프트:o.prompt})});
+        희망수령일:v('date')||'-',배송지:v('addr'),주문방식:'빠른 주문',결제:'계좌이체 (입금 대기)',AI프롬프트:o.prompt})});
       ok=r.ok}catch(_){ok=false}
     btn.disabled=false;btn.textContent='주문하고 결제 안내 받기 →';
     if(!ok){say('접수 중 문제가 생겼어요. 메일 앱으로 주문서를 열게요 — 보내기를 눌러주세요.',true);
