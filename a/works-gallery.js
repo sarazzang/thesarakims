@@ -48,3 +48,6 @@ const PRICES=[
 /* 입금 계좌 — 사라 님이 직접 채워주세요. 비어 있으면 손님에게 "접수 확인 후 안내"로 표시됩니다.
    예: {bank:'국민은행', number:'000000-00-000000', holder:'김사라'} */
 const BANK={bank:'', number:'', holder:''};
+
+/* 주문 저장소(구글 Apps Script 웹 앱 주소). 비어 있으면 메일 알림(FormSubmit)으로만 받아요. */
+const ORDER_API='';

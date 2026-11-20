@@ -170,6 +170,13 @@ fieldset{border:0;display:flex;flex-direction:column;gap:8px}
 .paybox .pnote{font-size:14px;color:var(--silver);margin-bottom:20px}
 .ship-note{grid-column:1/-1;font-size:14px;color:var(--silver);border-left:2px solid #444;padding:6px 0 6px 14px}
 .ship-note b{color:var(--silver-hi);font-weight:500}
+.drop{position:relative;display:flex;align-items:center;justify-content:center;min-height:96px;border:1px dashed #3a3a3a;background:var(--bg2);color:var(--muted);font-size:14px;letter-spacing:0;cursor:pointer;transition:border-color .25s,color .25s;text-align:center;padding:16px}
+.drop:hover,.drop.over{border-color:var(--silver-hi);color:var(--silver-hi)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.thumbs{display:flex;flex-wrap:wrap;gap:10px}
+.thumbs figure{position:relative;width:96px;height:96px;background:#151515}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.thumbs button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.7);color:#fff;font-size:13px;line-height:24px}
 .intro{font-size:17px;color:var(--silver);margin:-20px 0 40px;max-width:720px}
 .intro b{color:var(--silver-hi);font-weight:500}
 .step-t{grid-column:1/-1;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:22px;color:var(--silver-hi)}
@@ -265,6 +272,10 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
         <textarea id="q-person" name="person" required style="min-height:110px" placeholder="예) 결혼 10주년 선물로, 바다를 좋아하는 남편과 저를 따뜻하게 그려주세요."></textarea></div>
 
 
+      <div class="f full"><label for="o-photos">참고 사진 <span style="letter-spacing:0">— 선택 · 최대 6장 (얼굴, 반려동물, 장소 등)</span></label>
+        <label class="drop" for="o-photos"><input type="file" id="o-photos" accept="image/*" multiple><span>사진을 눌러서 고르거나 여기로 끌어다 놓으세요</span></label>
+        <div class="thumbs" id="thumbs"></div></div>
+
       <p class="step-t full">02 · 그림 스타일</p>
       <fieldset class="f full"><legend>어떤 느낌의 그림을 원하세요? <em>*</em> <span style="letter-spacing:0">— 하나를 골라주세요</span></legend>
         <div class="styles" id="styleCards"></div>
@@ -281,7 +292,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
 
       <div class="total"><span>예상 금액</span><b id="totalOut" style="font-size:18px;color:var(--muted)">크기를 선택해 주세요</b></div>
 
-      <label class="agree"><input type="checkbox" id="o-agree" required><span>주문 제작과 배송을 위해 성함·연락처·주소를 수집·이용하는 데 동의합니다. 사진이 필요한 경우 메일이 열리면 첨부해 주세요.</span></label>
+      <label class="agree"><input type="checkbox" id="o-agree" required><span>주문 제작과 배송을 위해 성함·연락처·주소를 수집·이용하는 데 동의합니다.</span></label>
 
       <div class="preview full" id="preview" hidden>
         <p class="label">완성된 AI 프롬프트 미리보기</p>
@@ -310,12 +321,13 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
 
 <footer><span>© 2026 Sara Kim Gallery</span><span>1:1 AI Art Commission</span></footer>
 
-<script src="/a/works-gallery.js?v=20261120d"></script>
+<script src="/a/works-gallery.js?v=20261120e"></script>
 <script>
 (()=>{
   const $=s=>document.querySelector(s);
   const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const MAIL='ceo@raraland-ai.com';
+  const MODE='빠른 주문';
   const won=n=>n.toLocaleString('ko-KR');
   $('#prodPills').innerHTML=PRICES.map(p=>`<input type="radio" name="prod" id="pp-${p.id}" value="${p.id}"><label for="pp-${p.id}"><b>${esc(p.name)}</b><small>${esc(p.size)} · ${won(p.price)}원</small></label>`).join('');
   const ro=$('#o-ref');ro&&ro.insertAdjacentHTML('beforeend',WORKS.map(w=>`<option>${esc(w.t)}</option>`).join(''));
@@ -331,6 +343,23 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
     {id:'free', ph:'Artist’s choice', t:'작가에게 맡기기', d:'이야기를 듣고 가장 어울리는 스타일로', en:"artist's choice"}
   ];
   $('#styleCards').innerHTML=STYLES.map(x=>`<input type="radio" name="style" id="st-${x.id}" value="${x.id}"><label for="st-${x.id}"><span class="th"${x.ex||x.img?` style="background-image:url(${x.img||'/a/g-'+x.ex+'-t.webp'})"`:''}>${x.ex||x.img?'':esc(x.ph)}</span><span class="tx"><b>${esc(x.t)}</b><small>${esc(x.d)}${x.ex?' · 예: '+esc(WORKS.find(w=>w.k===x.ex).t):''}</small></span></label>`).join('');
+
+  /* photos */
+  const PHOTOS=[];const MAXP=6;
+  function shrink(file){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(file);
+    img.onload=()=>{const m=1600,sc=Math.min(1,m/Math.max(img.width,img.height)),c=document.createElement('canvas');
+      c.width=Math.round(img.width*sc);c.height=Math.round(img.height*sc);c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      URL.revokeObjectURL(u);const d=c.toDataURL('image/jpeg',.85);res({name:file.name.replace(/\.[^.]+$/,'')+'.jpg',type:'image/jpeg',data:d.split(',')[1],url:d})};
+    img.onerror=()=>{URL.revokeObjectURL(u);rej()};img.src=u})}
+  function drawThumbs(){$('#thumbs').innerHTML=PHOTOS.map((p,i)=>`<figure><img src="${p.url}" alt=""><button type="button" data-rm="${i}" aria-label="사진 빼기">✕</button></figure>`).join('')}
+  async function addFiles(list){for(const f of [...list]){if(PHOTOS.length>=MAXP){say('사진은 최대 '+MAXP+'장까지 첨부할 수 있어요.',true);break}
+      if(!/^image\//.test(f.type))continue;try{PHOTOS.push(await shrink(f))}catch(_){say('읽을 수 없는 사진이 있어요: '+f.name,true)}}drawThumbs()}
+  $('#o-photos').addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
+  $('#thumbs').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(b){PHOTOS.splice(+b.dataset.rm,1);drawThumbs()}});
+  const drop=document.querySelector('.drop');
+  ['dragenter','dragover'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add('over')}));
+  ['dragleave','drop'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove('over')}));
+  drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
 
   /* order */
   const form=$('#orderForm'),msg=$('#msg'),ship=document.querySelector('.ship');
@@ -371,10 +400,18 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
     const btn=$('#submitBtn');btn.disabled=true;btn.textContent='접수 중…';
     $('#promptOut').textContent=o.prompt;$('#preview').hidden=false;
     let ok=false;
-    try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+    const sty=(typeof STYLES!=='undefined')?STYLES.find(x=>x.id===v('style')):null;
+    if(typeof ORDER_API!=='undefined'&&ORDER_API){
+      if(PHOTOS.length)btn.textContent='사진 올리는 중…';
+      try{const r=await fetch(ORDER_API,{method:'POST',body:JSON.stringify({action:'order',oid,mode:MODE,name:v('name'),contact:v('contact'),
+          product:`${prod.name} (${prod.size}) + 작품 캡션 2장`,amount:won(prod.price)+'원',addr:v('addr'),who:v('who'),style:sty?sty.t:'',
+          prompt:o.prompt,photos:PHOTOS.map(p=>({name:p.name,type:p.type,data:p.data}))})});
+        const j=await r.json();ok=!!j.ok}catch(_){ok=false}
+    }
+    if(!ok)try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
       body:JSON.stringify({_subject:`[새 주문·빠른 ${oid}] ${v('name')}님 · ${prod.name} · ${won(prod.price)}원`,_template:'box',_captcha:'false',
         주문번호:oid,주문자:v('name'),연락처:v('contact'),상품:`${prod.name} (${prod.size}) + 작품 캡션 2장`,금액:won(prod.price)+'원',
-        배송안내:'접수 후 1주 내 (주문 많을 시 최대 2주)',배송지:v('addr'),주문방식:'빠른 주문',결제:'계좌이체 (입금 대기)',AI프롬프트:o.prompt})});
+        배송안내:'접수 후 1주 내 (주문 많을 시 최대 2주)',배송지:v('addr'),주문방식:'빠른 주문',첨부사진:PHOTOS.length?PHOTOS.length+'장 (메일 첨부 불가 — 손님께 따로 요청)':'없음',결제:'계좌이체 (입금 대기)',AI프롬프트:o.prompt})});
       ok=r.ok}catch(_){ok=false}
     btn.disabled=false;btn.textContent='주문하고 결제 안내 받기 →';
     if(!ok){say('접수 중 문제가 생겼어요. 메일 앱으로 주문서를 열게요 — 보내기를 눌러주세요.',true);
