@@ -35,9 +35,9 @@ const SIZES={seoul:[1100,1375],manwon:[1100,619],crowd:[880,1100],rain:[1100,733
    원가 참고(갤러리피플 타임특가, 2026-11): 3호 19,800 / 6호 29,800 / 10호 44,800 / 20호 72,800 / 30호 118,000
    + 캡션 2장(11×15cm) + 배송비 */
 const PRICES=[
-  {id:'3',  name:'캔버스 3호',  size:'27.3 × 22.0 cm', price:89000,  ship:true, note:'책상 · 선반 위 · 첫 선물로'},
-  {id:'6',  name:'캔버스 6호',  size:'40.9 × 31.8 cm', price:129000, ship:true, note:'침실 · 현관 · 작은 벽'},
-  {id:'10', name:'캔버스 10호', size:'53.0 × 45.5 cm', price:179000, ship:true, note:'거실 한쪽 벽 · 기념일 선물'},
-  {id:'20', name:'캔버스 20호', size:'72.7 × 53.0 cm', price:259000, ship:true, note:'전시작과 같은 크기', best:true},
-  {id:'30', name:'캔버스 30호', size:'90.9 × 65.1 cm', price:359000, ship:true, note:'거실 메인 · 매장 인테리어'}
+  {id:'3',  name:'캔버스 3호',  size:'27.3 × 22.0 cm', price:99000,   ship:true, note:'책상 · 선반 위 · 첫 선물로'},
+  {id:'6',  name:'캔버스 6호',  size:'40.9 × 31.8 cm', price:149000, ship:true, note:'침실 · 현관 · 작은 벽'},
+  {id:'10', name:'캔버스 10호', size:'53.0 × 45.5 cm', price:199000, ship:true, note:'거실 한쪽 벽 · 기념일 선물'},
+  {id:'20', name:'캔버스 20호', size:'72.7 × 53.0 cm', price:289000, ship:true, note:'전시작과 같은 크기', best:true},
+  {id:'30', name:'캔버스 30호', size:'90.9 × 65.1 cm', price:399000, ship:true, note:'거실 메인 · 매장 인테리어'}
 ];
