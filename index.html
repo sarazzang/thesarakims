@@ -54,6 +54,8 @@ body::after{content:"";position:fixed;inset:-50%;z-index:100;pointer-events:none
 .nav ul{display:flex;gap:clamp(16px,2.6vw,36px);list-style:none}
 .nav ul a{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
 .nav ul a:hover{color:var(--silver-hi)}
+.nav ul a.order-cta{color:#0a0a0a;background:var(--silver-hi);padding:10px 16px;border:1px solid var(--silver-hi);transition:background .3s,color .3s}
+.nav ul a.order-cta:hover{background:transparent;color:var(--silver-hi)}
 
 /* hero */
 .hero{position:relative;height:100svh;min-height:560px;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#161616 0%,#0a0a0a 62%)}
@@ -185,7 +187,6 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
 }
 @media (max-width:720px){
   .nav ul{gap:14px}
-  .nav ul li:nth-child(n+4){display:none}
   .nav ul a{font-size:11px;letter-spacing:.14em}
   .hero h1{font-size:clamp(60px,19vw,110px)}
   .roles{gap:6px 14px;font-size:10px;letter-spacing:.2em;max-width:320px;margin-left:auto;margin-right:auto}
@@ -209,10 +210,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
 <nav class="nav" id="nav">
   <a class="mark" href="#top">Sara Kim</a>
   <ul>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#music">Music</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a class="order-cta" href="/gallery/">AI Art Work Order <span aria-hidden="true">→</span></a></li>
   </ul>
 </nav>
 
