@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>간단하게 주문하기 · Sara Kim Gallery</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="AI 이미지 콘테스트 입선 작가 김사라가 당신의 이야기로 단 하나의 그림을 1:1로 제작합니다.">
+<meta property="og:title" content="당신만을 위한 단 하나의 그림 · Sara Kim">
+<meta property="og:description" content="수상 경력의 AI 아티스트가 1:1로 제작하는 맞춤 그림. 작품 보기와 주문을 한곳에서.">
+<meta property="og:url" content="https://thesarakims.com/gallery/order/quick/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://thesarakims.com/a/og.jpg">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--bg:#0a0a0a;--bg2:#111;--line:#262626;--silver:#cfcfcf;--silver-hi:#f2f2f2;--muted:#8a8a8a;--dim:#5c5c5c;
+  --serif:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;--sans:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;--pad:clamp(20px,5vw,72px)}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--silver);font-family:var(--sans);font-size:16px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:1px solid var(--silver-hi);outline-offset:4px}
+body::after{content:"";position:fixed;inset:-50%;z-index:100;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.2s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+.silver{background:linear-gradient(100deg,#8d8d8d 0%,#f5f5f5 28%,#a9a9a9 46%,#fff 62%,#9a9a9a 82%,#dcdcdc 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 9s ease-in-out infinite}
+@keyframes sheen{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+.label{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+@keyframes fade{to{opacity:1}}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad);background:rgba(10,10,10,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .mark{font-family:var(--serif);font-size:18px;letter-spacing:.04em;color:var(--silver-hi)}
+.nav ul{display:flex;gap:clamp(16px,2.6vw,36px);list-style:none;align-items:center}
+.nav ul a{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.nav ul a:hover{color:var(--silver-hi)}
+.nav ul a.cta{color:#0a0a0a;background:var(--silver-hi);padding:9px 14px}
+
+.visit{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--silver-hi);border:1px solid #3a3a3a;padding:13px 20px;transition:background .3s,color .3s,border-color .3s}
+.visit:hover,.visit.solid{background:var(--silver-hi);color:#0a0a0a;border-color:var(--silver-hi)}
+.visit.solid:hover{background:transparent;color:var(--silver-hi)}
+.award{display:inline-block;font-size:11px;letter-spacing:.06em;color:#bdbdbd;border:1px solid #3a3a3a;padding:4px 9px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center;min-height:100svh;padding:clamp(100px,14vh,140px) var(--pad) clamp(50px,8vh,90px);max-width:1440px;margin:0 auto}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.2vw,104px);line-height:1.02;letter-spacing:-.02em;margin:22px 0 0}
+.hero h1 i{font-style:italic}
+.hero .ko{margin-top:26px;font-size:clamp(20px,2vw,28px);line-height:1.55;color:var(--silver-hi);font-weight:300}
+.hero .sub{margin-top:16px;font-size:16px;color:var(--silver);max-width:560px}
+.hero .btns{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
+.hero .creds{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12px;letter-spacing:.08em;color:var(--muted)}
+.hero .creds b{color:var(--silver-hi);font-weight:500}
+.hero-art{position:relative}
+.hero-art img{width:100%;max-height:78vh;object-fit:cover}
+.hero-art figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--dim)}
+.hero-art figcaption b{font-family:var(--serif);font-weight:400;font-size:17px;color:var(--silver-hi)}
+
+section{position:relative;padding:clamp(64px,10vh,120px) var(--pad)}
+.wrap{max-width:1280px;margin:0 auto}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:clamp(36px,6vh,64px)}
+.head h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,88px);line-height:1;letter-spacing:-.01em;color:var(--silver-hi)}
+.head .label{white-space:nowrap}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+
+/* gallery */
+.grid{display:flex;flex-wrap:wrap;gap:clamp(36px,5vh,56px) clamp(18px,2.4vw,32px)}
+.art{flex-grow:var(--r);flex-basis:calc(var(--r) * 250px);text-align:left;display:block;min-width:0}
+.art .frame{aspect-ratio:var(--r);overflow:hidden;background:var(--bg2)}
+.art img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s;filter:brightness(.9)}
+.art:hover img{transform:scale(1.03);filter:none}
+.art .cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px}
+.art .cap b{font-family:var(--serif);font-weight:400;font-size:22px;color:var(--silver-hi);line-height:1.25}
+.art .cap i{font-style:normal;font-size:11px;letter-spacing:.18em;color:var(--dim);white-space:nowrap}
+.art .award{margin-top:8px}
+
+/* how */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.steps li{padding:30px clamp(14px,2vw,28px) 30px 0;border-right:1px solid var(--line)}
+.steps li+li{padding-left:clamp(14px,2vw,28px)}
+.steps li:last-child{border-right:0}
+.steps .n{font-family:var(--serif);font-style:italic;color:var(--dim);font-size:18px}
+.steps h3{margin-top:10px;font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.2vw,30px);color:var(--silver-hi);line-height:1.2}
+.steps p{margin-top:10px;font-size:15px;color:var(--silver)}
+.options{margin-top:clamp(36px,6vh,56px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px)}
+.opt{border:1px solid var(--line);padding:26px}
+.opt .label{display:block}
+.opt h4{margin-top:10px;font-family:var(--serif);font-weight:400;font-size:24px;color:var(--silver-hi)}
+.opt p{margin-top:8px;font-size:14px;color:var(--silver)}
+.note{margin-top:18px;font-size:13px;color:var(--muted)}
+
+/* order */
+.order .wrap{max-width:980px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px}
+.f{display:flex;flex-direction:column;gap:8px}
+.f.full{grid-column:1/-1}
+.f label,.f legend{font-size:12px;letter-spacing:.14em;color:var(--muted)}
+.f label em,.f legend em{font-style:normal;color:var(--silver-hi)}
+input,select,textarea{font:inherit;font-size:16px;color:var(--silver-hi);background:var(--bg2);border:1px solid #2e2e2e;padding:14px 16px;border-radius:0;width:100%;transition:border-color .3s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--silver)}
+textarea{min-height:150px;resize:vertical;line-height:1.7}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%23999' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:16px;padding-right:40px}
+fieldset{border:0;display:flex;flex-direction:column;gap:8px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills input{position:absolute;opacity:0;width:1px;height:1px}
+.pills label{font-size:14px;letter-spacing:0;color:var(--silver);border:1px solid #2e2e2e;padding:10px 16px;cursor:pointer;transition:all .25s}
+.pills input:checked+label{background:var(--silver-hi);color:#0a0a0a;border-color:var(--silver-hi)}
+.pills input:focus-visible+label{outline:1px solid var(--silver-hi);outline-offset:3px}
+.agree{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--silver)}
+.agree input{width:18px;height:18px;margin-top:4px;flex:none;accent-color:#f2f2f2}
+.submit{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
+.submit button.visit{cursor:pointer}
+.group+.group{margin-top:clamp(70px,11vh,120px)}
+.g-head{display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:clamp(20px,4vw,60px);margin-bottom:clamp(28px,5vh,48px);align-items:baseline}
+.g-k{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--muted);grid-row:span 2}
+.g-head h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,40px);color:var(--silver-hi);line-height:1.2}
+.g-head p:last-child{margin-top:8px;color:var(--silver);max-width:640px}
+.more{margin-top:clamp(36px,5vh,52px);display:flex;justify-content:center}
+.art .kind{display:block;margin-top:6px;font-size:12px;color:var(--muted)}
+.pricing{margin-top:clamp(40px,6vh,64px);display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line)}
+.pc{position:relative;padding:28px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;transition:background .3s}
+.pc:last-child{border-right:0}
+.pc:hover{background:var(--bg2)}
+.pc.best{background:#141414}
+.pc .flag{position:absolute;top:-1px;left:-1px;right:-1px;height:2px;background:var(--silver-hi)}
+.pc .label{display:block}
+.pc h4{margin-top:10px;font-family:var(--serif);font-weight:400;font-size:24px;color:var(--silver-hi);line-height:1.2}
+.pc .sz{margin-top:4px;font-size:13px;color:var(--muted)}
+.pc .pr{margin-top:22px;font-family:var(--serif);font-size:30px;color:var(--silver-hi);letter-spacing:-.01em}
+.pc .pr small{font-family:var(--sans);font-size:13px;color:var(--muted);margin-left:2px}
+.pc .nt{margin-top:6px;font-size:13px;color:var(--silver);flex:1}
+.pc a{margin-top:20px;font-size:12px;letter-spacing:.18em;color:var(--silver-hi);border-bottom:1px solid #444;align-self:flex-start;padding-bottom:2px}
+.pills.prod{display:grid;grid-template-columns:repeat(5,1fr)}
+.prod label{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:14px 16px!important}
+.prod label b{font-weight:500;font-size:15px}
+.prod label small{font-size:12px;opacity:.75}
+.total{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}
+.total span{font-size:13px;letter-spacing:.14em;color:var(--muted)}
+.total b{font-family:var(--serif);font-weight:400;font-size:30px;color:var(--silver-hi)}
+.incl{margin-top:22px;border:1px solid var(--line);padding:24px 26px}
+.incl ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.incl b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;color:var(--silver-hi)}
+.incl span{font-size:13px;color:var(--muted)}
+.styles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.styles input{position:absolute;opacity:0;width:1px;height:1px}
+.styles label{display:flex;flex-direction:column;border:1px solid #2e2e2e;cursor:pointer;transition:border-color .25s,background .25s;letter-spacing:0;height:100%}
+.styles .th{aspect-ratio:4/3;background:#151515 center 30%/cover no-repeat;filter:grayscale(.5) brightness(.8);transition:filter .3s;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--dim)}
+.styles .tx{padding:12px 14px 14px}
+.styles b{display:block;font-weight:500;font-size:15px;color:var(--silver-hi)}
+.styles small{display:block;margin-top:3px;font-size:12px;line-height:1.5;color:var(--muted)}
+.styles label:hover{border-color:#555}
+.styles label:hover .th{filter:none}
+.styles input:checked+label{border-color:var(--silver-hi);background:#161616}
+.styles input:checked+label .th{filter:none}
+.styles input:focus-visible+label{outline:1px solid var(--silver-hi);outline-offset:3px}
+.paybox{margin-top:10px;border:1px solid var(--silver-hi);padding:clamp(24px,4vw,44px);background:#121212;outline:none}
+.paybox h3{margin-top:10px;font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,40px);color:var(--silver-hi)}
+.paybox .oid{margin-top:6px;color:var(--muted);font-size:14px}.paybox .oid b{color:var(--silver-hi);font-weight:500;letter-spacing:.06em}
+.paybox dl{margin:26px 0;border-top:1px solid var(--line)}
+.paybox dl div{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.paybox dt{font-size:13px;letter-spacing:.12em;color:var(--muted)}
+.paybox dd{text-align:right;color:var(--silver-hi);font-size:17px}
+.paybox #payAmt{font-family:var(--serif);font-size:28px}
+.paybox .pnote{font-size:14px;color:var(--silver);margin-bottom:20px}
+.intro{font-size:17px;color:var(--silver);margin:-20px 0 40px;max-width:720px}
+.intro b{color:var(--silver-hi);font-weight:500}
+.step-t{grid-column:1/-1;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:22px;color:var(--silver-hi)}
+.step-t:first-child{margin-top:0;border-top:0;padding-top:0}
+.full{grid-column:1/-1}
+
+.preview{grid-column:1/-1;border:1px solid var(--line);background:var(--bg2);padding:22px}
+.preview pre{margin-top:12px;white-space:pre-wrap;font-family:var(--sans);font-size:14px;line-height:1.75;color:var(--silver-hi)}
+.msg{grid-column:1/-1;font-size:14px;color:var(--silver-hi);border-left:2px solid var(--silver-hi);padding:4px 0 4px 14px;display:none}
+.msg.show{display:block}
+.msg.err{color:#e0a0a0;border-color:#e0a0a0}
+
+footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pad) calc(26px + env(safe-area-inset-bottom));border-top:1px solid var(--line);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:200;display:none;background:#070707;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.lb.open{display:block;animation:fade .35s ease}
+.lb-inner{min-height:100%;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:clamp(24px,4vw,64px);align-items:center;padding:clamp(70px,9vh,90px) var(--pad) 50px;max-width:1500px;margin:0 auto}
+.lb-img img{max-height:82vh;width:auto;max-width:100%;margin:0 auto}
+.lb-text h3{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3.6vw,52px);line-height:1.1;color:var(--silver-hi)}
+.lb-text .en{font-family:var(--serif);font-style:italic;color:var(--muted);margin-top:4px}
+.lb-text .meta{margin-top:10px;font-size:12px;letter-spacing:.06em;color:var(--dim)}
+.lb-text .lead{margin-top:24px;padding-top:24px;border-top:1px solid var(--line);font-size:17px;font-weight:500;color:var(--silver-hi);line-height:1.7}
+.lb-text .desc{margin-top:14px;font-size:15px;color:var(--silver)}
+.lb-close{position:fixed;top:16px;right:calc(var(--pad) - 10px);z-index:210;width:44px;height:44px;font-size:26px;line-height:1;color:var(--silver-hi)}
+.lb-nav{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.lb-nav button,.lb-nav a{border:1px solid #3a3a3a;padding:10px 16px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--silver)}
+.lb-nav button:hover{border-color:var(--silver-hi);color:var(--silver-hi)}
+.lb-nav a{background:var(--silver-hi);color:#0a0a0a;border-color:var(--silver-hi)}
+
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-art{max-width:520px}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps li:nth-child(2){border-right:0}
+  .steps li:nth-child(3){padding-left:0}
+  .steps li:nth-child(n+3){border-top:1px solid var(--line)}
+  .pricing{grid-template-columns:1fr 1fr}
+  .incl ul{grid-template-columns:1fr 1fr}
+  .styles{grid-template-columns:repeat(3,1fr)}
+  .pills.prod{grid-template-columns:repeat(3,1fr)}
+  .pc{border-bottom:1px solid var(--line)}
+  .g-head{grid-template-columns:1fr}
+  .g-k{grid-row:auto;margin-bottom:6px}
+  .lb-inner{grid-template-columns:1fr}
+  .lb-img img{max-height:62vh}
+}
+@media (max-width:720px){
+  .nav ul li.hide-m{display:none}
+  .nav ul a{font-size:11px;letter-spacing:.14em}
+  .head{flex-direction:column;align-items:flex-start;gap:8px}
+  .grid{display:block}
+  .art{margin-bottom:44px}
+  .art .frame{aspect-ratio:auto}
+  .art .frame img{height:auto}
+  .steps{grid-template-columns:1fr}
+  .steps li,.steps li+li{padding:24px 0;border-right:0;border-top:1px solid var(--line)}
+  .steps li:first-child{border-top:0}
+  form{grid-template-columns:1fr}
+  .pricing{grid-template-columns:1fr}
+  .pc{border-right:0}
+  .pills.prod{grid-template-columns:1fr 1fr}
+  .styles{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;align-items:center;gap:6px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="mark" href="/gallery/">Sara Kim <span style="font-style:italic;color:var(--muted)">Gallery</span></a>
+  <ul><li><a href="/gallery/#works">← 작품 보기</a></li></ul>
+</nav>
+
+<section class="order" id="order" style="padding-top:clamp(110px,15vh,150px)">
+  <div class="wrap">
+    <div class="head rv"><h2>Quick <i style="font-style:italic">order</i></h2><span class="label">간단하게 주문하기 · 약 2분</span></div>
+    <p class="intro rv">꼭 필요한 것만 물어볼게요. 나머지는 작가가 직접 연락드려 함께 채워갑니다. 더 자세히 쓰고 싶다면 <a href="/gallery/order/" style="color:var(--silver-hi);border-bottom:1px solid #555">세밀하게 주문하기</a>로 가세요.</p>
+    <form id="orderForm" class="rv" novalidate>
+      <p class="step-t full">01 · 누구를 위한 그림</p>
+      <fieldset class="f full"><legend>누구를 위한 그림인가요? <em>*</em></legend>
+        <div class="pills">
+          <input type="radio" name="who" id="w1" value="나"><label for="w1">나</label>
+          <input type="radio" name="who" id="w2" value="선물할 사람"><label for="w2">선물할 사람</label>
+          <input type="radio" name="who" id="w3" value="연인·부부"><label for="w3">연인·부부</label>
+          <input type="radio" name="who" id="w4" value="가족"><label for="w4">가족</label>
+          <input type="radio" name="who" id="w7" value="친구"><label for="w7">친구</label>
+          <input type="radio" name="who" id="w5" value="반려동물"><label for="w5">반려동물</label>
+          <input type="radio" name="who" id="w6" value="가게·브랜드"><label for="w6">가게·브랜드</label>
+        </div>
+      </fieldset>
+      <div class="f full"><label for="q-person">어떤 그림을 원하세요? <em>*</em> <span style="letter-spacing:0">— 한두 줄이면 충분해요</span></label>
+        <textarea id="q-person" name="person" required style="min-height:110px" placeholder="예) 결혼 10주년 선물로, 바다를 좋아하는 남편과 저를 따뜻하게 그려주세요."></textarea></div>
+
+
+      <p class="step-t full">02 · 그림 스타일</p>
+      <fieldset class="f full"><legend>어떤 느낌의 그림을 원하세요? <em>*</em> <span style="letter-spacing:0">— 하나를 골라주세요</span></legend>
+        <div class="styles" id="styleCards"></div>
+      </fieldset>
+
+      <p class="step-t full">03 · 받으실 방법</p>
+      <fieldset class="f full"><legend>캔버스 크기 <em>*</em> <span style="letter-spacing:0">— 모든 크기에 작품 캡션 2장(11×15cm) 포함</span></legend>
+        <div class="pills prod" id="prodPills"></div>
+      </fieldset>
+      <div class="f full"><label for="o-date">희망 수령일</label><input id="o-date" name="date" type="date"></div>
+      <div class="f"><label for="o-name">주문자 성함 <em>*</em></label><input id="o-name" name="name" autocomplete="name" required></div>
+      <div class="f"><label for="o-contact">연락처 (전화 또는 이메일) <em>*</em></label><input id="o-contact" name="contact" required></div>
+      <div class="f full ship"><label for="o-addr">배송 주소 <em>*</em></label><input id="o-addr" name="addr" autocomplete="street-address" placeholder="받으실 분 성함 · 주소 · 연락처"></div>
+
+      <div class="total"><span>예상 금액</span><b id="totalOut" style="font-size:18px;color:var(--muted)">크기를 선택해 주세요</b></div>
+
+      <label class="agree"><input type="checkbox" id="o-agree" required><span>주문 제작과 배송을 위해 성함·연락처·주소를 수집·이용하는 데 동의합니다. 사진이 필요한 경우 메일이 열리면 첨부해 주세요.</span></label>
+
+      <div class="preview full" id="preview" hidden>
+        <p class="label">완성된 AI 프롬프트 미리보기</p>
+        <pre id="promptOut"></pre>
+      </div>
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+      <div class="submit">
+        <button class="visit solid" type="submit" id="submitBtn">주문하고 결제 안내 받기 →</button>
+      </div>
+    </form>
+    <div class="paybox" id="paybox" hidden tabindex="-1">
+      <p class="label">Order received · 주문 접수 완료</p>
+      <h3>주문이 접수되었어요.</h3>
+      <p class="oid">주문번호 <b id="payOid"></b></p>
+      <dl>
+        <div><dt>결제 금액</dt><dd id="payAmt"></dd></div>
+        <div><dt>입금 계좌</dt><dd id="payAcct"></dd></div>
+        <div><dt>입금자명</dt><dd id="payName"></dd></div>
+      </dl>
+      <p class="pnote">24시간 안에 입금해 주시면 확인 후 바로 제작을 시작하고, 시안이 나오면 남겨주신 연락처로 보내드려요. 입금자명이 주문자 성함과 다르면 연락처로 알려주세요.</p>
+      <button class="visit" type="button" id="copyAcct">계좌번호 복사</button>
+    </div>
+    <p class="note">결제는 계좌이체로 받고 있어요. 주문하면 바로 금액과 입금 계좌가 안내되고, 입금이 확인되면 제작을 시작합니다. 문의: <a href="mailto:ceo@raraland-ai.com" style="color:var(--silver-hi);border-bottom:1px solid #444">ceo@raraland-ai.com</a></p>
+  </div>
+</section>
+
+<footer><span>© 2026 Sara Kim Gallery</span><span>1:1 AI Art Commission</span></footer>
+
+<script src="/a/works-gallery.js?v=20261120d"></script>
+<script>
+(()=>{
+  const $=s=>document.querySelector(s);
+  const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const MAIL='ceo@raraland-ai.com';
+  const won=n=>n.toLocaleString('ko-KR');
+  $('#prodPills').innerHTML=PRICES.map(p=>`<input type="radio" name="prod" id="pp-${p.id}" value="${p.id}"><label for="pp-${p.id}"><b>${esc(p.name)}</b><small>${esc(p.size)} · ${won(p.price)}원</small></label>`).join('');
+  const ro=$('#o-ref');ro&&ro.insertAdjacentHTML('beforeend',WORKS.map(w=>`<option>${esc(w.t)}</option>`).join(''));
+  /* styles */
+  const STYLES=[
+    {id:'modern', t:'현대미술 · 추상', d:'색과 형태로 마음을 표현하는 캔버스 작품', ex:'ctb', en:'abstract contemporary painting, expressive color fields, gallery canvas'},
+    {id:'photo', t:'사진처럼', d:'실제로 찍은 듯한 사실적인 한 장면', ex:'seoul', en:'photorealistic, documentary photography, natural light'},
+    {id:'surreal', t:'형상화 · 초현실', d:'현실에 없는 장면을 사진처럼 상징적으로', ex:'jeongche', en:'conceptual surreal photography, symbolic composition'},
+    {id:'oriental', t:'동양화 · 수묵', d:'먹의 번짐과 여백이 있는 산수화 느낌', ex:'rain', en:'Korean ink wash painting, sumi-e, generous negative space'},
+    {id:'water', t:'수채화', d:'맑게 번지는 색, 부드럽고 따뜻하게', ex:'iassc', en:'soft watercolor painting, translucent washes, paper texture'},
+    {id:'oil', img:'/a/style-oil.webp', t:'유화 · 명화풍', d:'두꺼운 붓 터치의 클래식한 그림', en:'classical oil painting, thick impasto brushstrokes'},
+    {id:'illust', img:'/a/style-illust.webp', t:'일러스트 · 동화', d:'귀엽고 포근한 그림책 같은 그림', en:'storybook illustration, warm and whimsical'},
+    {id:'free', ph:'Artist’s choice', t:'작가에게 맡기기', d:'이야기를 듣고 가장 어울리는 스타일로', en:"artist's choice"}
+  ];
+  $('#styleCards').innerHTML=STYLES.map(x=>`<input type="radio" name="style" id="st-${x.id}" value="${x.id}"><label for="st-${x.id}"><span class="th"${x.ex||x.img?` style="background-image:url(${x.img||'/a/g-'+x.ex+'-t.webp'})"`:''}>${x.ex||x.img?'':esc(x.ph)}</span><span class="tx"><b>${esc(x.t)}</b><small>${esc(x.d)}${x.ex?' · 예: '+esc(WORKS.find(w=>w.k===x.ex).t):''}</small></span></label>`).join('');
+
+  /* order */
+  const form=$('#orderForm'),msg=$('#msg'),ship=document.querySelector('.ship');
+  const say=(t,err)=>{msg.textContent=t;msg.className='msg show'+(err?' err':'')};
+  form.addEventListener('change',e=>{if(e.target.name!=='prod')return;const p=PRICES.find(x=>x.id===e.target.value);ship.classList.toggle('on',p.ship);const t=$('#totalOut');t.textContent=won(p.price)+'원';t.removeAttribute('style')});
+  function build(check){
+    const d=new FormData(form),v=k=>(d.get(k)||'').toString().trim(),moods=d.getAll('mood');
+    const prod=PRICES.find(x=>x.id===v('prod')),canvas=!!(prod&&prod.ship);
+    if(check){const miss=[];
+      if(!v('who'))miss.push('누구의 그림');if(!v('person'))miss.push('원하는 그림');
+      if(!v('style'))miss.push('그림 스타일');if(!prod)miss.push('크기와 형태');
+      if(!v('name'))miss.push('성함');if(!v('contact'))miss.push('연락처');if(canvas&&!v('addr'))miss.push('배송 주소');
+      if(!$('#o-agree').checked)miss.push('개인정보 동의');
+      if(miss.length){say('다음 항목을 확인해 주세요: '+miss.join(', '),true);return null}}
+    const ref=v('ref')?WORKS.find(w=>w.t===v('ref')):null,sty=STYLES.find(x=>x.id===v('style'));
+    const prompt=[
+      `주인공: ${v('who')||'-'}`,
+      `요청: ${v('person')||'-'}`,
+      v('place')?`배경·장면: ${v('place')}`:'',
+      v('symbol')?`상징 요소: ${v('symbol')}`:'',
+      `그림 스타일: ${sty?sty.t+' ('+sty.en+')':'-'}`,
+      ref?`참고 작품: 「${ref.t}」 — ${ref.lead.replace(/<br>/g,' ')}`:'',
+      v('extra')?`요청 사항: ${v('extra')}`:'',
+      `캡션(11×15cm, 2장): 제목 ${v('title')?'「'+v('title')+'」':'작가가 지음'} + 작품 이야기`,
+      `출력: ${prod?(canvas?'캔버스 인쇄용 고해상도 · '+prod.size:'디지털 고해상도 '+prod.size):'-'}`
+    ].filter(Boolean).join('\n');
+    const body=['[1:1 그림 주문서]','','■ AI 그림 프롬프트',prompt,'',
+      '■ 주문 정보','주문자: '+v('name'),'연락처: '+v('contact'),'상품: '+(prod?`${prod.name} (${prod.size}) + 작품 캡션 2장`:'-'),'금액: '+(prod?won(prod.price)+'원':'-'),'희망 수령일: '+(v('date')||'-'),canvas?'배송지: '+v('addr'):'',
+      '','(참고 사진이 있다면 이 메일에 첨부해 주세요)'].filter((x,i,a)=>x!==''||a[i-1]!=='').join('\n');
+    return {prompt,subject:`[그림 주문] ${v('name')}님 · ${v('who')}`,body};
+  }
+  $('#previewBtn')&&$('#previewBtn').addEventListener('click',()=>{const o=build(false);$('#promptOut').textContent=o.prompt;$('#preview').hidden=false;msg.className='msg'});
+  const ENDPOINT='https://formsubmit.co/ajax/'+MAIL;
+  const acctText=()=>(typeof BANK!=='undefined'&&BANK.number)?`${BANK.bank} ${BANK.number} (예금주 ${BANK.holder})`:'';
+  form.addEventListener('submit',async e=>{e.preventDefault();const o=build(true);if(!o)return;
+    const d=new FormData(form),v=k=>(d.get(k)||'').toString().trim(),prod=PRICES.find(x=>x.id===v('prod'));
+    const now=new Date(),oid='SK'+String(now.getFullYear()).slice(2)+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+    const btn=$('#submitBtn');btn.disabled=true;btn.textContent='접수 중…';
+    $('#promptOut').textContent=o.prompt;$('#preview').hidden=false;
+    let ok=false;
+    try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({_subject:`[새 주문·간단 ${oid}] ${v('name')}님 · ${prod.name} · ${won(prod.price)}원`,_template:'box',_captcha:'false',
+        주문번호:oid,주문자:v('name'),연락처:v('contact'),상품:`${prod.name} (${prod.size}) + 작품 캡션 2장`,금액:won(prod.price)+'원',
+        희망수령일:v('date')||'-',배송지:v('addr'),주문방식:'간단 주문',결제:'계좌이체 (입금 대기)',AI프롬프트:o.prompt})});
+      ok=r.ok}catch(_){ok=false}
+    btn.disabled=false;btn.textContent='주문하고 결제 안내 받기 →';
+    if(!ok){say('접수 중 문제가 생겼어요. 메일 앱으로 주문서를 열게요 — 보내기를 눌러주세요.',true);
+      location.href=`mailto:${MAIL}?subject=${encodeURIComponent('[그림 주문 '+oid+'] '+v('name'))}&body=${encodeURIComponent(o.body)}`;return}
+    msg.className='msg';
+    $('#payOid').textContent=oid;$('#payAmt').textContent=won(prod.price)+'원';
+    $('#payAcct').textContent=acctText()||'접수 확인 후 연락처로 안내드려요';
+    $('#payName').textContent=v('name');$('#copyAcct').hidden=!acctText();
+    form.hidden=true;const pb=$('#paybox');pb.hidden=false;pb.scrollIntoView({behavior:'smooth',block:'start'});pb.focus({preventScroll:true});
+  });
+  $('#copyAcct').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(BANK.number.replace(/[^0-9]/g,''));$('#copyAcct').textContent='복사했어요 ✓'}catch(_){}});
+
+  /* url params: ?size=20&ref=작품명&style=oil */
+  const qs=new URLSearchParams(location.search);
+  if(qs.get('size')){const r=$('#pp-'+qs.get('size'));if(r){r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}))}}
+  if(qs.get('ref')&&ro)ro.value=qs.get('ref');
+  if(qs.get('style')){const r=$('#st-'+qs.get('style'));r&&(r.checked=true)}
+  /* reveal */
+  const els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}}),{rootMargin:'0px 0px -8% 0px'});els.forEach(el=>io.observe(el))}
+  else els.forEach(el=>el.classList.add('on'));
+})();
+</script>
+</body>
+</html>

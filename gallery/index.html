@@ -167,6 +167,14 @@ fieldset{border:0;display:flex;flex-direction:column;gap:8px}
 .paybox dd{text-align:right;color:var(--silver-hi);font-size:17px}
 .paybox #payAmt{font-family:var(--serif);font-size:28px}
 .paybox .pnote{font-size:14px;color:var(--silver);margin-bottom:20px}
+.choose{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,24px)}
+.ch{display:flex;flex-direction:column;border:1px solid var(--line);padding:clamp(26px,3.4vw,44px);transition:border-color .3s,background .3s}
+.ch:hover{border-color:var(--silver-hi);background:#121212}
+.ch h3{margin-top:12px;font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,42px);color:var(--silver-hi);line-height:1.15}
+.ch p{margin-top:14px;color:var(--silver);font-size:15px}
+.ch ul{list-style:none;margin:20px 0 28px;border-top:1px solid var(--line);flex:1}
+.ch li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
+.ch .go{align-self:flex-start;font-size:12px;letter-spacing:.2em;color:#0a0a0a;background:var(--silver-hi);padding:13px 20px}
 .intro{font-size:17px;color:var(--silver);margin:-20px 0 40px;max-width:720px}
 .intro b{color:var(--silver-hi);font-weight:500}
 .step-t{grid-column:1/-1;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:22px;color:var(--silver-hi)}
@@ -227,6 +235,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
   .steps li:first-child{border-top:0}
   form{grid-template-columns:1fr}
   .pricing{grid-template-columns:1fr}
+  .choose{grid-template-columns:1fr}
   .pc{border-right:0}
   .pills.prod{grid-template-columns:1fr 1fr}
   .styles{grid-template-columns:1fr 1fr}
@@ -300,86 +309,24 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
 
 <section class="order" id="order">
   <div class="wrap">
-    <div class="head rv"><h2>Order</h2><span class="label">질문에 답하면, 그림이 시작됩니다</span></div>
-    <p class="intro rv">몇 가지 질문에 답해 주세요. 답변이 <b>한 장의 AI 그림 프롬프트</b>로 정리되어 작가에게 전달되고, 작가가 그 프롬프트로 그림을 제작해 완성품을 보내드립니다.</p>
-    <form id="orderForm" class="rv" novalidate>
-      <p class="step-t full">01 · 그림 속 주인공</p>
-      <fieldset class="f full"><legend>누구를 위한 그림인가요? <em>*</em></legend>
-        <div class="pills">
-          <input type="radio" name="who" id="w1" value="나"><label for="w1">나</label>
-          <input type="radio" name="who" id="w2" value="선물할 사람"><label for="w2">선물할 사람</label>
-          <input type="radio" name="who" id="w3" value="연인·부부"><label for="w3">연인·부부</label>
-          <input type="radio" name="who" id="w4" value="가족"><label for="w4">가족</label>
-          <input type="radio" name="who" id="w7" value="친구"><label for="w7">친구</label>
-          <input type="radio" name="who" id="w5" value="반려동물"><label for="w5">반려동물</label>
-          <input type="radio" name="who" id="w6" value="가게·브랜드"><label for="w6">가게·브랜드</label>
-        </div>
-      </fieldset>
-      <div class="f full"><label for="q-person">그 사람은 어떤 사람인가요? <em>*</em></label>
-        <textarea id="q-person" name="person" required placeholder="성격, 하는 일, 좋아하는 것, 버릇… 떠오르는 대로 적어주세요.&#10;예) 말수는 적지만 늘 먼저 챙겨주는 사람. 새벽에 커피 내리는 걸 좋아하고, 바다를 보면 아이처럼 웃어요."></textarea></div>
-      <div class="f full"><label for="q-intro">그림을 보는 사람에게 어떤 사람으로 소개되고 싶나요? <em>*</em></label>
-        <input id="q-intro" name="intro" required placeholder="한 문장으로. 예) 조용하지만 단단하게 자기 길을 걷는 사람"></div>
-
-      <p class="step-t full">02 · 그림 스타일</p>
-      <fieldset class="f full"><legend>어떤 느낌의 그림을 원하세요? <em>*</em> <span style="letter-spacing:0">— 하나를 골라주세요</span></legend>
-        <div class="styles" id="styleCards"></div>
-      </fieldset>
-
-      <p class="step-t full">03 · 그림 속 세계</p>
-      <div class="f"><label for="q-place">이 사람을 떠올리게 하는 장소·장면</label><input id="q-place" name="place" placeholder="예) 처음 만난 한강 다리, 할머니 댁 마당"></div>
-      <div class="f"><label for="q-symbol">상징하는 물건·색·계절</label><input id="q-symbol" name="symbol" placeholder="예) 낡은 필름카메라, 초록색, 늦가을"></div>
-      <fieldset class="f full"><legend>원하는 분위기 (여러 개 선택 가능) <em>*</em></legend>
-        <div class="pills">
-          <input type="checkbox" name="mood" id="d1" value="따뜻한"><label for="d1">따뜻한</label>
-          <input type="checkbox" name="mood" id="d2" value="몽환적인"><label for="d2">몽환적인</label>
-          <input type="checkbox" name="mood" id="d3" value="고요한"><label for="d3">고요한</label>
-          <input type="checkbox" name="mood" id="d4" value="강렬한"><label for="d4">강렬한</label>
-          <input type="checkbox" name="mood" id="d5" value="유쾌한"><label for="d5">유쾌한</label>
-          <input type="checkbox" name="mood" id="d6" value="그리운"><label for="d6">그리운</label>
-          <input type="checkbox" name="mood" id="d7" value="경건한"><label for="d7">경건한</label>
-        </div>
-      </fieldset>
-      <div class="f"><label for="o-ref">닮았으면 하는 갤러리 작품</label>
-        <select id="o-ref" name="ref"><option value="">작가에게 맡기기</option></select></div>
-      <div class="f"><label for="q-title">캡션에 넣을 작품 제목</label><input id="q-title" name="title" placeholder="비워두시면 작가가 지어드려요"></div>
-      <div class="f"><label for="q-extra">꼭 넣거나 빼고 싶은 것</label><input id="q-extra" name="extra" placeholder="예) 얼굴은 뒷모습으로, 글씨는 넣지 말아주세요"></div>
-
-      <p class="step-t full">04 · 받으실 방법</p>
-      <fieldset class="f full"><legend>캔버스 크기 <em>*</em> <span style="letter-spacing:0">— 모든 크기에 작품 캡션 2장(11×15cm) 포함</span></legend>
-        <div class="pills prod" id="prodPills"></div>
-      </fieldset>
-      <div class="f full"><label for="o-date">희망 수령일</label><input id="o-date" name="date" type="date"></div>
-      <div class="f"><label for="o-name">주문자 성함 <em>*</em></label><input id="o-name" name="name" autocomplete="name" required></div>
-      <div class="f"><label for="o-contact">연락처 (전화 또는 이메일) <em>*</em></label><input id="o-contact" name="contact" required></div>
-      <div class="f full ship"><label for="o-addr">배송 주소 <em>*</em></label><input id="o-addr" name="addr" autocomplete="street-address" placeholder="받으실 분 성함 · 주소 · 연락처"></div>
-
-      <div class="total"><span>예상 금액</span><b id="totalOut" style="font-size:18px;color:var(--muted)">크기를 선택해 주세요</b></div>
-
-      <label class="agree"><input type="checkbox" id="o-agree" required><span>주문 제작과 배송을 위해 성함·연락처·주소를 수집·이용하는 데 동의합니다. 사진이 필요한 경우 메일이 열리면 첨부해 주세요.</span></label>
-
-      <div class="preview full" id="preview" hidden>
-        <p class="label">완성된 AI 프롬프트 미리보기</p>
-        <pre id="promptOut"></pre>
-      </div>
-      <p class="msg" id="msg" role="status" aria-live="polite"></p>
-      <div class="submit">
-        <button class="visit solid" type="submit" id="submitBtn">주문하고 결제 안내 받기 →</button>
-        <button class="visit" type="button" id="previewBtn">프롬프트 미리보기</button>
-      </div>
-    </form>
-    <div class="paybox" id="paybox" hidden tabindex="-1">
-      <p class="label">Order received · 주문 접수 완료</p>
-      <h3>주문이 접수되었어요.</h3>
-      <p class="oid">주문번호 <b id="payOid"></b></p>
-      <dl>
-        <div><dt>결제 금액</dt><dd id="payAmt"></dd></div>
-        <div><dt>입금 계좌</dt><dd id="payAcct"></dd></div>
-        <div><dt>입금자명</dt><dd id="payName"></dd></div>
-      </dl>
-      <p class="pnote">24시간 안에 입금해 주시면 확인 후 바로 제작을 시작하고, 시안이 나오면 남겨주신 연락처로 보내드려요. 입금자명이 주문자 성함과 다르면 연락처로 알려주세요.</p>
-      <button class="visit" type="button" id="copyAcct">계좌번호 복사</button>
+    <div class="head rv"><h2>Order</h2><span class="label">두 가지 방법으로 주문할 수 있어요</span></div>
+    <div class="choose rv">
+      <a class="ch" href="/gallery/order/quick/">
+        <span class="label">Quick · 약 2분</span>
+        <h3>간단하게 주문하기</h3>
+        <p>누구를 위한 그림인지, 원하는 그림을 한두 줄로. 스타일과 크기만 고르면 끝. 나머지는 작가가 직접 연락드려 함께 채워갑니다.</p>
+        <ul><li>누구를 위한 그림</li><li>원하는 그림 한두 줄</li><li>스타일 · 크기</li></ul>
+        <span class="go">간단하게 주문 →</span>
+      </a>
+      <a class="ch" href="/gallery/order/">
+        <span class="label">Detailed · 약 5분</span>
+        <h3>세밀하게 주문하기</h3>
+        <p>그 사람이 어떤 사람인지, 어떻게 소개되고 싶은지까지. 답변이 한 장의 AI 그림 프롬프트로 정리되어 작가에게 전달됩니다.</p>
+        <ul><li>인물 이야기 · 소개 한 문장</li><li>장소 · 상징 · 분위기</li><li>참고 작품 · 캡션 제목</li></ul>
+        <span class="go">세밀하게 주문 →</span>
+      </a>
     </div>
-    <p class="note">결제는 계좌이체로 받고 있어요. 주문하면 바로 금액과 입금 계좌가 안내되고, 입금이 확인되면 제작을 시작합니다. 문의: <a href="mailto:ceo@raraland-ai.com" style="color:var(--silver-hi);border-bottom:1px solid #444">ceo@raraland-ai.com</a></p>
+    <p class="note rv">결제는 계좌이체로 받고 있어요. 주문하면 바로 금액과 입금 계좌가 안내되고, 입금이 확인되면 제작을 시작합니다. 문의: <a href="mailto:ceo@raraland-ai.com" style="color:var(--silver-hi);border-bottom:1px solid #444">ceo@raraland-ai.com</a></p>
   </div>
 </section>
 
@@ -390,7 +337,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
   <div class="lb-inner" id="lbInner"></div>
 </div>
 
-<script src="../a/works-gallery.js?v=20261120c"></script>
+<script src="../a/works-gallery.js?v=20261120d"></script>
 <script>
 (()=>{
   const $=s=>document.querySelector(s);
@@ -414,11 +361,8 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
       <span class="label">Canvas${p.best?' · 추천':''}</span>
       <h4>${esc(p.name)}</h4><p class="sz">${esc(p.size)}</p>
       <p class="pr">${won(p.price)}<small>원</small></p><p class="nt">${esc(p.note)}</p>
-      <a href="#order" data-pick="${p.id}">이 크기로 주문 →</a>
+      <a href="/gallery/order/quick/?size=${p.id}">이 크기로 주문 →</a>
     </div>`).join('');
-  $('#prodPills').innerHTML=PRICES.map(p=>`<input type="radio" name="prod" id="pp-${p.id}" value="${p.id}"><label for="pp-${p.id}"><b>${esc(p.name)}</b><small>${esc(p.size)} · ${won(p.price)}원</small></label>`).join('');
-  $('#pricing').addEventListener('click',e=>{const a=e.target.closest('[data-pick]');if(!a)return;const r=$('#pp-'+a.dataset.pick);r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}))});
-  $('#o-ref').insertAdjacentHTML('beforeend',WORKS.map(w=>`<option>${esc(w.t)}</option>`).join(''));
 
   /* lightbox */
   const lb=$('#lb'),inner=$('#lbInner');let cur=0,lastFocus=null;
@@ -427,88 +371,17 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
       <div class="lb-text"><h3>${esc(w.t)}</h3>${w.en?`<p class="en">${esc(w.en)}</p>`:''}
         <p class="meta">${esc(w.meta)}</p><p class="meta" style="color:#bdbdbd">${esc(w.award||(w.type==='contest'?'공모전 출품작 · '+w.contest:'1:1 주문 제작 · '+w.client))}</p>
         <p class="lead">${w.lead}</p><p class="desc">${esc(w.desc)}</p>
-        <div class="lb-nav"><button data-go="-1">← Prev</button><button data-go="1">Next →</button><a href="#order" data-ref="${cur}">이런 느낌으로 주문 →</a></div></div>`;
+        <div class="lb-nav"><button data-go="-1">← Prev</button><button data-go="1">Next →</button><a href="/gallery/order/?ref=${encodeURIComponent(w.t)}">이런 느낌으로 주문 →</a></div></div>`;
     lb.scrollTop=0}
   function open(i){lastFocus=document.activeElement;show(i);lb.classList.add('open');document.body.style.overflow='hidden';$('#lbClose').focus()}
   function close(){lb.classList.remove('open');inner.innerHTML='';document.body.style.overflow='';lastFocus&&lastFocus.focus()}
   $('#works').addEventListener('click',e=>{const b=e.target.closest('.art');b&&open(+b.dataset.i)});
   $('#lbClose').addEventListener('click',close);
   lb.addEventListener('click',e=>{
-    const r=e.target.closest('[data-ref]');if(r){$('#o-ref').value=WORKS[+r.dataset.ref].t;close();return}
     const g=e.target.closest('[data-go]');if(g){show(cur+ +g.dataset.go);return}
     if(e.target===lb||e.target===inner)close()});
   addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;
     if(e.key==='Escape')close();if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
-
-  /* styles */
-  const STYLES=[
-    {id:'modern', t:'현대미술 · 추상', d:'색과 형태로 마음을 표현하는 캔버스 작품', ex:'ctb', en:'abstract contemporary painting, expressive color fields, gallery canvas'},
-    {id:'photo', t:'사진처럼', d:'실제로 찍은 듯한 사실적인 한 장면', ex:'seoul', en:'photorealistic, documentary photography, natural light'},
-    {id:'surreal', t:'형상화 · 초현실', d:'현실에 없는 장면을 사진처럼 상징적으로', ex:'jeongche', en:'conceptual surreal photography, symbolic composition'},
-    {id:'oriental', t:'동양화 · 수묵', d:'먹의 번짐과 여백이 있는 산수화 느낌', ex:'rain', en:'Korean ink wash painting, sumi-e, generous negative space'},
-    {id:'water', t:'수채화', d:'맑게 번지는 색, 부드럽고 따뜻하게', ex:'iassc', en:'soft watercolor painting, translucent washes, paper texture'},
-    {id:'oil', img:'../a/style-oil.webp', t:'유화 · 명화풍', d:'두꺼운 붓 터치의 클래식한 그림', en:'classical oil painting, thick impasto brushstrokes'},
-    {id:'illust', img:'../a/style-illust.webp', t:'일러스트 · 동화', d:'귀엽고 포근한 그림책 같은 그림', en:'storybook illustration, warm and whimsical'},
-    {id:'free', ph:'Artist’s choice', t:'작가에게 맡기기', d:'이야기를 듣고 가장 어울리는 스타일로', en:"artist's choice"}
-  ];
-  $('#styleCards').innerHTML=STYLES.map(x=>`<input type="radio" name="style" id="st-${x.id}" value="${x.id}"><label for="st-${x.id}"><span class="th"${x.ex||x.img?` style="background-image:url(${x.img||'../a/g-'+x.ex+'-t.webp'})"`:''}>${x.ex||x.img?'':esc(x.ph)}</span><span class="tx"><b>${esc(x.t)}</b><small>${esc(x.d)}${x.ex?' · 예: '+esc(WORKS.find(w=>w.k===x.ex).t):''}</small></span></label>`).join('');
-
-  /* order */
-  const form=$('#orderForm'),msg=$('#msg'),ship=document.querySelector('.ship');
-  const say=(t,err)=>{msg.textContent=t;msg.className='msg show'+(err?' err':'')};
-  form.addEventListener('change',e=>{if(e.target.name!=='prod')return;const p=PRICES.find(x=>x.id===e.target.value);ship.classList.toggle('on',p.ship);const t=$('#totalOut');t.textContent=won(p.price)+'원';t.removeAttribute('style')});
-  function build(check){
-    const d=new FormData(form),v=k=>(d.get(k)||'').toString().trim(),moods=d.getAll('mood');
-    const prod=PRICES.find(x=>x.id===v('prod')),canvas=!!(prod&&prod.ship);
-    if(check){const miss=[];
-      if(!v('who'))miss.push('누구의 그림');if(!v('person'))miss.push('어떤 사람인가요');if(!v('intro'))miss.push('소개 한 문장');
-      if(!v('style'))miss.push('그림 스타일');if(!moods.length)miss.push('분위기');if(!prod)miss.push('크기와 형태');
-      if(!v('name'))miss.push('성함');if(!v('contact'))miss.push('연락처');if(canvas&&!v('addr'))miss.push('배송 주소');
-      if(!$('#o-agree').checked)miss.push('개인정보 동의');
-      if(miss.length){say('다음 항목을 확인해 주세요: '+miss.join(', '),true);return null}}
-    const ref=v('ref')?WORKS.find(w=>w.t===v('ref')):null,sty=STYLES.find(x=>x.id===v('style'));
-    const prompt=[
-      `주인공: ${v('who')||'-'}`,
-      `인물: ${v('person')||'-'}`,
-      `이 그림이 말하는 것: "${v('intro')||'-'}"`,
-      v('place')?`배경·장면: ${v('place')}`:'',
-      v('symbol')?`상징 요소: ${v('symbol')}`:'',
-      `그림 스타일: ${sty?sty.t+' ('+sty.en+')':'-'}`,
-      `분위기: ${moods.join(', ')||'-'}`,
-      ref?`참고 작품: 「${ref.t}」 — ${ref.lead.replace(/<br>/g,' ')}`:'',
-      v('extra')?`요청 사항: ${v('extra')}`:'',
-      `캡션(11×15cm, 2장): 제목 ${v('title')?'「'+v('title')+'」':'작가가 지음'} + 작품 이야기`,
-      `출력: ${prod?(canvas?'캔버스 인쇄용 고해상도 · '+prod.size:'디지털 고해상도 '+prod.size):'-'}`
-    ].filter(Boolean).join('\n');
-    const body=['[1:1 그림 주문서]','','■ AI 그림 프롬프트',prompt,'',
-      '■ 주문 정보','주문자: '+v('name'),'연락처: '+v('contact'),'상품: '+(prod?`${prod.name} (${prod.size}) + 작품 캡션 2장`:'-'),'금액: '+(prod?won(prod.price)+'원':'-'),'희망 수령일: '+(v('date')||'-'),canvas?'배송지: '+v('addr'):'',
-      '','(참고 사진이 있다면 이 메일에 첨부해 주세요)'].filter((x,i,a)=>x!==''||a[i-1]!=='').join('\n');
-    return {prompt,subject:`[그림 주문] ${v('name')}님 · ${v('who')}`,body};
-  }
-  $('#previewBtn').addEventListener('click',()=>{const o=build(false);$('#promptOut').textContent=o.prompt;$('#preview').hidden=false;msg.className='msg'});
-  const ENDPOINT='https://formsubmit.co/ajax/'+MAIL;
-  const acctText=()=>(typeof BANK!=='undefined'&&BANK.number)?`${BANK.bank} ${BANK.number} (예금주 ${BANK.holder})`:'';
-  form.addEventListener('submit',async e=>{e.preventDefault();const o=build(true);if(!o)return;
-    const d=new FormData(form),v=k=>(d.get(k)||'').toString().trim(),prod=PRICES.find(x=>x.id===v('prod'));
-    const now=new Date(),oid='SK'+String(now.getFullYear()).slice(2)+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
-    const btn=$('#submitBtn');btn.disabled=true;btn.textContent='접수 중…';
-    $('#promptOut').textContent=o.prompt;$('#preview').hidden=false;
-    let ok=false;
-    try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-      body:JSON.stringify({_subject:`[새 주문 ${oid}] ${v('name')}님 · ${prod.name} · ${won(prod.price)}원`,_template:'box',_captcha:'false',
-        주문번호:oid,주문자:v('name'),연락처:v('contact'),상품:`${prod.name} (${prod.size}) + 작품 캡션 2장`,금액:won(prod.price)+'원',
-        희망수령일:v('date')||'-',배송지:v('addr'),결제:'계좌이체 (입금 대기)',AI프롬프트:o.prompt})});
-      ok=r.ok}catch(_){ok=false}
-    btn.disabled=false;btn.textContent='주문하고 결제 안내 받기 →';
-    if(!ok){say('접수 중 문제가 생겼어요. 메일 앱으로 주문서를 열게요 — 보내기를 눌러주세요.',true);
-      location.href=`mailto:${MAIL}?subject=${encodeURIComponent('[그림 주문 '+oid+'] '+v('name'))}&body=${encodeURIComponent(o.body)}`;return}
-    msg.className='msg';
-    $('#payOid').textContent=oid;$('#payAmt').textContent=won(prod.price)+'원';
-    $('#payAcct').textContent=acctText()||'접수 확인 후 연락처로 안내드려요';
-    $('#payName').textContent=v('name');$('#copyAcct').hidden=!acctText();
-    form.hidden=true;const pb=$('#paybox');pb.hidden=false;pb.scrollIntoView({behavior:'smooth',block:'start'});pb.focus({preventScroll:true});
-  });
-  $('#copyAcct').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(BANK.number.replace(/[^0-9]/g,''));$('#copyAcct').textContent='복사했어요 ✓'}catch(_){}});
 
   /* reveal */
   const els=document.querySelectorAll('.rv');
