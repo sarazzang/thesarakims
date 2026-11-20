@@ -145,6 +145,18 @@ fieldset{border:0;display:flex;flex-direction:column;gap:8px}
 .incl ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .incl b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;color:var(--silver-hi)}
 .incl span{font-size:13px;color:var(--muted)}
+.styles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.styles input{position:absolute;opacity:0;width:1px;height:1px}
+.styles label{display:flex;flex-direction:column;border:1px solid #2e2e2e;cursor:pointer;transition:border-color .25s,background .25s;letter-spacing:0;height:100%}
+.styles .th{aspect-ratio:4/3;background:#151515 center/cover no-repeat;filter:grayscale(.5) brightness(.8);transition:filter .3s;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--dim)}
+.styles .tx{padding:12px 14px 14px}
+.styles b{display:block;font-weight:500;font-size:15px;color:var(--silver-hi)}
+.styles small{display:block;margin-top:3px;font-size:12px;line-height:1.5;color:var(--muted)}
+.styles label:hover{border-color:#555}
+.styles label:hover .th{filter:none}
+.styles input:checked+label{border-color:var(--silver-hi);background:#161616}
+.styles input:checked+label .th{filter:none}
+.styles input:focus-visible+label{outline:1px solid var(--silver-hi);outline-offset:3px}
 .intro{font-size:17px;color:var(--silver);margin:-20px 0 40px;max-width:720px}
 .intro b{color:var(--silver-hi);font-weight:500}
 .step-t{grid-column:1/-1;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:22px;color:var(--silver-hi)}
@@ -184,6 +196,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
   .steps li:nth-child(n+3){border-top:1px solid var(--line)}
   .pricing{grid-template-columns:1fr 1fr}
   .incl ul{grid-template-columns:1fr 1fr}
+  .styles{grid-template-columns:repeat(3,1fr)}
   .pills.prod{grid-template-columns:repeat(3,1fr)}
   .pc{border-bottom:1px solid var(--line)}
   .g-head{grid-template-columns:1fr}
@@ -206,6 +219,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
   .pricing{grid-template-columns:1fr}
   .pc{border-right:0}
   .pills.prod{grid-template-columns:1fr 1fr}
+  .styles{grid-template-columns:1fr 1fr}
   footer{flex-direction:column;align-items:center;gap:6px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
@@ -280,12 +294,13 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
     <p class="intro rv">몇 가지 질문에 답해 주세요. 답변이 <b>한 장의 AI 그림 프롬프트</b>로 정리되어 작가에게 전달되고, 작가가 그 프롬프트로 그림을 제작해 완성품을 보내드립니다.</p>
     <form id="orderForm" class="rv" novalidate>
       <p class="step-t full">01 · 그림 속 주인공</p>
-      <fieldset class="f full"><legend>누구의 그림인가요? <em>*</em></legend>
+      <fieldset class="f full"><legend>누구를 위한 그림인가요? <em>*</em></legend>
         <div class="pills">
-          <input type="radio" name="who" id="w1" value="나 자신"><label for="w1">나 자신</label>
-          <input type="radio" name="who" id="w2" value="선물 받을 사람"><label for="w2">선물 받을 사람</label>
-          <input type="radio" name="who" id="w3" value="우리 둘(연인·부부)"><label for="w3">우리 둘</label>
+          <input type="radio" name="who" id="w1" value="나"><label for="w1">나</label>
+          <input type="radio" name="who" id="w2" value="선물할 사람"><label for="w2">선물할 사람</label>
+          <input type="radio" name="who" id="w3" value="연인·부부"><label for="w3">연인·부부</label>
           <input type="radio" name="who" id="w4" value="가족"><label for="w4">가족</label>
+          <input type="radio" name="who" id="w7" value="친구"><label for="w7">친구</label>
           <input type="radio" name="who" id="w5" value="반려동물"><label for="w5">반려동물</label>
           <input type="radio" name="who" id="w6" value="가게·브랜드"><label for="w6">가게·브랜드</label>
         </div>
@@ -295,7 +310,12 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
       <div class="f full"><label for="q-intro">그림을 보는 사람에게 어떤 사람으로 소개되고 싶나요? <em>*</em></label>
         <input id="q-intro" name="intro" required placeholder="한 문장으로. 예) 조용하지만 단단하게 자기 길을 걷는 사람"></div>
 
-      <p class="step-t full">02 · 그림 속 세계</p>
+      <p class="step-t full">02 · 그림 스타일</p>
+      <fieldset class="f full"><legend>어떤 느낌의 그림을 원하세요? <em>*</em> <span style="letter-spacing:0">— 하나를 골라주세요</span></legend>
+        <div class="styles" id="styleCards"></div>
+      </fieldset>
+
+      <p class="step-t full">03 · 그림 속 세계</p>
       <div class="f"><label for="q-place">이 사람을 떠올리게 하는 장소·장면</label><input id="q-place" name="place" placeholder="예) 처음 만난 한강 다리, 할머니 댁 마당"></div>
       <div class="f"><label for="q-symbol">상징하는 물건·색·계절</label><input id="q-symbol" name="symbol" placeholder="예) 낡은 필름카메라, 초록색, 늦가을"></div>
       <fieldset class="f full"><legend>원하는 분위기 (여러 개 선택 가능) <em>*</em></legend>
@@ -309,12 +329,12 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
           <input type="checkbox" name="mood" id="d7" value="경건한"><label for="d7">경건한</label>
         </div>
       </fieldset>
-      <div class="f"><label for="o-ref">닮았으면 하는 작품</label>
+      <div class="f"><label for="o-ref">닮았으면 하는 갤러리 작품</label>
         <select id="o-ref" name="ref"><option value="">작가에게 맡기기</option></select></div>
       <div class="f"><label for="q-title">캡션에 넣을 작품 제목</label><input id="q-title" name="title" placeholder="비워두시면 작가가 지어드려요"></div>
       <div class="f"><label for="q-extra">꼭 넣거나 빼고 싶은 것</label><input id="q-extra" name="extra" placeholder="예) 얼굴은 뒷모습으로, 글씨는 넣지 말아주세요"></div>
 
-      <p class="step-t full">03 · 받으실 방법</p>
+      <p class="step-t full">04 · 받으실 방법</p>
       <fieldset class="f full"><legend>캔버스 크기 <em>*</em> <span style="letter-spacing:0">— 모든 크기에 작품 캡션 2장(11×15cm) 포함</span></legend>
         <div class="pills prod" id="prodPills"></div>
       </fieldset>
@@ -399,6 +419,19 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
   addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;
     if(e.key==='Escape')close();if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
 
+  /* styles */
+  const STYLES=[
+    {id:'modern', t:'현대미술 · 추상', d:'색과 형태로 마음을 표현하는 캔버스 작품', ex:'iassc', en:'abstract contemporary painting, expressive color fields, gallery canvas'},
+    {id:'photo', t:'사진처럼', d:'실제로 찍은 듯한 사실적인 한 장면', ex:'seoul', en:'photorealistic, documentary photography, natural light'},
+    {id:'surreal', t:'형상화 · 초현실', d:'현실에 없는 장면을 사진처럼 상징적으로', ex:'jeongche', en:'conceptual surreal photography, symbolic composition'},
+    {id:'oriental', t:'동양화 · 수묵', d:'먹의 번짐과 여백이 있는 산수화 느낌', ex:'rain', en:'Korean ink wash painting, sumi-e, generous negative space'},
+    {id:'water', ph:'Watercolor', t:'수채화', d:'맑게 번지는 색, 부드럽고 따뜻하게', en:'soft watercolor painting, translucent washes, paper texture'},
+    {id:'oil', ph:'Oil painting', t:'유화 · 명화풍', d:'두꺼운 붓 터치의 클래식한 그림', en:'classical oil painting, thick impasto brushstrokes'},
+    {id:'illust', ph:'Illustration', t:'일러스트 · 동화', d:'귀엽고 포근한 그림책 같은 그림', en:'storybook illustration, warm and whimsical'},
+    {id:'free', ph:'Artist’s choice', t:'작가에게 맡기기', d:'이야기를 듣고 가장 어울리는 스타일로', en:"artist's choice"}
+  ];
+  $('#styleCards').innerHTML=STYLES.map(x=>`<input type="radio" name="style" id="st-${x.id}" value="${x.id}"><label for="st-${x.id}"><span class="th"${x.ex?` style="background-image:url(../a/g-${x.ex}-t.webp)"`:''}>${x.ex?'':esc(x.ph)}</span><span class="tx"><b>${esc(x.t)}</b><small>${esc(x.d)}${x.ex?' · 예: '+esc(WORKS.find(w=>w.k===x.ex).t):''}</small></span></label>`).join('');
+
   /* order */
   const form=$('#orderForm'),msg=$('#msg'),ship=document.querySelector('.ship');
   const say=(t,err)=>{msg.textContent=t;msg.className='msg show'+(err?' err':'')};
@@ -408,19 +441,20 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
     const prod=PRICES.find(x=>x.id===v('prod')),canvas=!!(prod&&prod.ship);
     if(check){const miss=[];
       if(!v('who'))miss.push('누구의 그림');if(!v('person'))miss.push('어떤 사람인가요');if(!v('intro'))miss.push('소개 한 문장');
-      if(!moods.length)miss.push('분위기');if(!prod)miss.push('크기와 형태');
+      if(!v('style'))miss.push('그림 스타일');if(!moods.length)miss.push('분위기');if(!prod)miss.push('크기와 형태');
       if(!v('name'))miss.push('성함');if(!v('contact'))miss.push('연락처');if(canvas&&!v('addr'))miss.push('배송 주소');
       if(!$('#o-agree').checked)miss.push('개인정보 동의');
       if(miss.length){say('다음 항목을 확인해 주세요: '+miss.join(', '),true);return null}}
-    const ref=v('ref')?WORKS.find(w=>w.t===v('ref')):null;
+    const ref=v('ref')?WORKS.find(w=>w.t===v('ref')):null,sty=STYLES.find(x=>x.id===v('style'));
     const prompt=[
       `주인공: ${v('who')||'-'}`,
       `인물: ${v('person')||'-'}`,
       `이 그림이 말하는 것: "${v('intro')||'-'}"`,
       v('place')?`배경·장면: ${v('place')}`:'',
       v('symbol')?`상징 요소: ${v('symbol')}`:'',
+      `그림 스타일: ${sty?sty.t+' ('+sty.en+')':'-'}`,
       `분위기: ${moods.join(', ')||'-'}`,
-      ref?`스타일 참고: 「${ref.t}」 — ${ref.lead.replace(/<br>/g,' ')}`:'스타일: 작가 재량',
+      ref?`참고 작품: 「${ref.t}」 — ${ref.lead.replace(/<br>/g,' ')}`:'',
       v('extra')?`요청 사항: ${v('extra')}`:'',
       `캡션(11×15cm, 2장): 제목 ${v('title')?'「'+v('title')+'」':'작가가 지음'} + 작품 이야기`,
       `출력: ${prod?(canvas?'캔버스 인쇄용 고해상도 · '+prod.size:'디지털 고해상도 '+prod.size):'-'}`
