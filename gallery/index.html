@@ -427,10 +427,10 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
     {id:'oriental', t:'동양화 · 수묵', d:'먹의 번짐과 여백이 있는 산수화 느낌', ex:'rain', en:'Korean ink wash painting, sumi-e, generous negative space'},
     {id:'water', ph:'Watercolor', t:'수채화', d:'맑게 번지는 색, 부드럽고 따뜻하게', en:'soft watercolor painting, translucent washes, paper texture'},
     {id:'oil', ph:'Oil painting', t:'유화 · 명화풍', d:'두꺼운 붓 터치의 클래식한 그림', en:'classical oil painting, thick impasto brushstrokes'},
-    {id:'illust', ph:'Illustration', t:'일러스트 · 동화', d:'귀엽고 포근한 그림책 같은 그림', en:'storybook illustration, warm and whimsical'},
+    {id:'illust', img:'../a/style-illust.webp', t:'일러스트 · 동화', d:'귀엽고 포근한 그림책 같은 그림', en:'storybook illustration, warm and whimsical'},
     {id:'free', ph:'Artist’s choice', t:'작가에게 맡기기', d:'이야기를 듣고 가장 어울리는 스타일로', en:"artist's choice"}
   ];
-  $('#styleCards').innerHTML=STYLES.map(x=>`<input type="radio" name="style" id="st-${x.id}" value="${x.id}"><label for="st-${x.id}"><span class="th"${x.ex?` style="background-image:url(../a/g-${x.ex}-t.webp)"`:''}>${x.ex?'':esc(x.ph)}</span><span class="tx"><b>${esc(x.t)}</b><small>${esc(x.d)}${x.ex?' · 예: '+esc(WORKS.find(w=>w.k===x.ex).t):''}</small></span></label>`).join('');
+  $('#styleCards').innerHTML=STYLES.map(x=>`<input type="radio" name="style" id="st-${x.id}" value="${x.id}"><label for="st-${x.id}"><span class="th"${x.ex||x.img?` style="background-image:url(${x.img||'../a/g-'+x.ex+'-t.webp'})"`:''}>${x.ex||x.img?'':esc(x.ph)}</span><span class="tx"><b>${esc(x.t)}</b><small>${esc(x.d)}${x.ex?' · 예: '+esc(WORKS.find(w=>w.k===x.ex).t):''}</small></span></label>`).join('');
 
   /* order */
   const form=$('#orderForm'),msg=$('#msg'),ship=document.querySelector('.ship');
