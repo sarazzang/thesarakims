@@ -44,3 +44,7 @@ const PRICES=[
   {id:'20', name:'캔버스 20호', size:'72.7 × 53.0 cm', price:289000, ship:true, note:'전시작과 같은 크기', best:true},
   {id:'30', name:'캔버스 30호', size:'90.9 × 65.1 cm', price:399000, ship:true, note:'거실 메인 · 매장 인테리어'}
 ];
+
+/* 입금 계좌 — 사라 님이 직접 채워주세요. 비어 있으면 손님에게 "접수 확인 후 안내"로 표시됩니다.
+   예: {bank:'국민은행', number:'000000-00-000000', holder:'김사라'} */
+const BANK={bank:'', number:'', holder:''};
