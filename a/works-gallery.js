@@ -5,6 +5,9 @@ const WORKS=[
   {t:'만원(滿員)', k:'manwon', type:'contest', contest:'2026 AI 이미지 콘테스트 출품작', meta:'2026 · AI-generated image',
    lead:'출근길 지하철이 빈틈없이 가득 찼다. 그러나 좌석과 통로, 손잡이를 채운 것은 사람이 아니라 수백 대의 휴대폰이다.',
    desc:'창밖으로 햇살 가득한 한강과 남산이 지나가지만, 어떤 화면도 그쪽을 향하지 않는다. 사람으로 붐비는 도시에서 우리는 정말 그곳에 있는지를 묻는다.'},
+  {t:'AI ENGINEER', k:'cat', type:'contest', contest:"AI ART AWARD 'NEXT ART AI' 출품작", meta:'2026 · AI-generated image',
+   lead:'잔디밭 앞, 작은 고양이가 노트북 앞에 앉아 있다.',
+   desc:'노트북에는 줄을 그어 고친 RARALAND 스티커와 AI ENGINEER 스티커가 붙어 있다.'},
   {t:'CROWD NOISE', k:'crowd', type:'commission', client:'뮤지션 7illin(홍승훈) 의뢰', meta:'2026 · 29.7 × 42 cm · AI-generated image, digital print on canvas',
    lead:'붉은색과 푸른색, 두 원색의 미세한 반복이 화면 전체를 덮는다. 거리에 따라 하나의 보라색 면으로 지각된다.',
    desc:'근접한 시선 앞에서 그 색의 입자는 같은 박자 위에 선 익명의 군중으로 전환된다. 중앙의 음파는 채색이 아닌 여백으로 구현되어, 부재가 곧 형상이 되는 역설을 드러낸다. 엄격한 반복의 질서 속에 놓인 단 하나의 어긋남, 누워 있는 한 인물만이 처음부터 혼색되지 않은 보라로 존재한다. 뮤지션 7illin(홍승훈)을 위해 제작되었다.'},
@@ -29,7 +32,7 @@ const SONGS=[
   {t:'보내줘야만 하는 너', kind:'Single', v:'y8MJMHDhiqc'},
   {t:'넌 참 웃기는 남자야', kind:'Single', v:'cLx6YLEMLsU'}
 ];
-const SIZES={seoul:[1100,1375],manwon:[1100,619],crowd:[880,1100],rain:[1100,733],iassc:[821,1100],jeongche:[1100,733],ctb:[825,1100]};
+const SIZES={cat:[1100,880],seoul:[1100,1375],manwon:[1100,619],crowd:[880,1100],rain:[1100,733],iassc:[821,1100],jeongche:[1100,733],ctb:[825,1100]};
 
 /* 크기별 가격 — 여기 숫자만 바꾸면 갤러리 페이지 전체에 반영됩니다
    원가 참고(갤러리피플 타임특가, 2026-11): 3호 19,800 / 6호 29,800 / 10호 44,800 / 20호 72,800 / 30호 118,000
