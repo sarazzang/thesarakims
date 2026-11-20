@@ -50,4 +50,4 @@ const PRICES=[
 const BANK={bank:'', number:'', holder:''};
 
 /* 주문 저장소(구글 Apps Script 웹 앱 주소). 비어 있으면 메일 알림(FormSubmit)으로만 받아요. */
-const ORDER_API='';
+const ORDER_API='https://script.google.com/macros/s/AKfycby-gtVVj1pKPdPoRUpWRnpuZD16Z7jDTv1Q-jIv-DpAWleS6CtnRL_VGZGQyo7l7Z0L/exec';
