@@ -141,12 +141,16 @@ fieldset{border:0;display:flex;flex-direction:column;gap:8px}
 .total{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}
 .total span{font-size:13px;letter-spacing:.14em;color:var(--muted)}
 .total b{font-family:var(--serif);font-weight:400;font-size:30px;color:var(--silver-hi)}
+.incl{margin-top:22px;border:1px solid var(--line);padding:24px 26px}
+.incl ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.incl b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;color:var(--silver-hi)}
+.incl span{font-size:13px;color:var(--muted)}
 .intro{font-size:17px;color:var(--silver);margin:-20px 0 40px;max-width:720px}
 .intro b{color:var(--silver-hi);font-weight:500}
 .step-t{grid-column:1/-1;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:22px;color:var(--silver-hi)}
 .step-t:first-child{margin-top:0;border-top:0;padding-top:0}
 .full{grid-column:1/-1}
-.ship{display:none}.ship.on{display:flex}
+
 .preview{grid-column:1/-1;border:1px solid var(--line);background:var(--bg2);padding:22px}
 .preview pre{margin-top:12px;white-space:pre-wrap;font-family:var(--sans);font-size:14px;line-height:1.75;color:var(--silver-hi)}
 .msg{grid-column:1/-1;font-size:14px;color:var(--silver-hi);border-left:2px solid var(--silver-hi);padding:4px 0 4px 14px;display:none}
@@ -179,6 +183,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
   .steps li:nth-child(3){padding-left:0}
   .steps li:nth-child(n+3){border-top:1px solid var(--line)}
   .pricing{grid-template-columns:1fr 1fr}
+  .incl ul{grid-template-columns:1fr 1fr}
   .pills.prod{grid-template-columns:repeat(3,1fr)}
   .pc{border-bottom:1px solid var(--line)}
   .g-head{grid-template-columns:1fr}
@@ -262,10 +267,10 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
       <li><span class="n">01</span><h3>질문에 답하기</h3><p>당신이 어떤 사람인지, 어떻게 소개되고 싶은지 몇 가지 질문에 답해 주세요.</p></li>
       <li><span class="n">02</span><h3>나만의 프롬프트</h3><p>답변이 한 장의 AI 그림 프롬프트로 정리되어 작가에게 전달되고, 결제 안내를 드립니다.</p></li>
       <li><span class="n">03</span><h3>1:1 제작</h3><p>수상 작가가 프롬프트를 바탕으로 직접 그림을 만들고, 시안을 보여드려 함께 다듬습니다.</p></li>
-      <li><span class="n">04</span><h3>완성 &amp; 배송</h3><p>고해상도 디지털 파일로 보내드리거나, 캔버스 프린트로 집까지 배송해 드립니다.</p></li>
+      <li><span class="n">04</span><h3>완성 &amp; 배송</h3><p>캔버스 액자와 작품 캡션 2장을 함께 집까지 배송해 드립니다.</p></li>
     </ol>
     <div class="pricing rv" id="pricing"></div>
-    <p class="note rv">모든 가격은 작품 제작비와 시안 수정(2회)을 포함합니다. 캔버스는 원목 프레임에 감아 마감하며 배송비가 포함되어 있습니다.</p>
+    <div class="incl rv"><p class="label">기본 구성</p><ul><li><b>캔버스 액자</b><span>원목 프레임 · 옆면 3cm</span></li><li><b>작품 캡션 2장</b><span>11 × 15 cm · 제목과 작품 이야기</span></li><li><b>시안 수정 2회</b><span>마음에 들 때까지 함께</span></li><li><b>배송</b><span>배송비 포함</span></li></ul></div>
   </div>
 </section>
 
@@ -306,10 +311,11 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
       </fieldset>
       <div class="f"><label for="o-ref">닮았으면 하는 작품</label>
         <select id="o-ref" name="ref"><option value="">작가에게 맡기기</option></select></div>
+      <div class="f"><label for="q-title">캡션에 넣을 작품 제목</label><input id="q-title" name="title" placeholder="비워두시면 작가가 지어드려요"></div>
       <div class="f"><label for="q-extra">꼭 넣거나 빼고 싶은 것</label><input id="q-extra" name="extra" placeholder="예) 얼굴은 뒷모습으로, 글씨는 넣지 말아주세요"></div>
 
       <p class="step-t full">03 · 받으실 방법</p>
-      <fieldset class="f full"><legend>크기와 형태 <em>*</em></legend>
+      <fieldset class="f full"><legend>캔버스 크기 <em>*</em> <span style="letter-spacing:0">— 모든 크기에 작품 캡션 2장(11×15cm) 포함</span></legend>
         <div class="pills prod" id="prodPills"></div>
       </fieldset>
       <div class="f full"><label for="o-date">희망 수령일</label><input id="o-date" name="date" type="date"></div>
@@ -364,7 +370,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
   /* pricing */
   $('#pricing').innerHTML=PRICES.map(p=>`
     <div class="pc${p.best?' best':''}">${p.best?'<span class="flag"></span>':''}
-      <span class="label">${p.ship?'Canvas':'Digital'}${p.best?' · 추천':''}</span>
+      <span class="label">Canvas${p.best?' · 추천':''}</span>
       <h4>${esc(p.name)}</h4><p class="sz">${esc(p.size)}</p>
       <p class="pr">${won(p.price)}<small>원</small></p><p class="nt">${esc(p.note)}</p>
       <a href="#order" data-pick="${p.id}">이 크기로 주문 →</a>
@@ -416,10 +422,11 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:26px var(--pa
       `분위기: ${moods.join(', ')||'-'}`,
       ref?`스타일 참고: 「${ref.t}」 — ${ref.lead.replace(/<br>/g,' ')}`:'스타일: 작가 재량',
       v('extra')?`요청 사항: ${v('extra')}`:'',
+      `캡션(11×15cm, 2장): 제목 ${v('title')?'「'+v('title')+'」':'작가가 지음'} + 작품 이야기`,
       `출력: ${prod?(canvas?'캔버스 인쇄용 고해상도 · '+prod.size:'디지털 고해상도 '+prod.size):'-'}`
     ].filter(Boolean).join('\n');
     const body=['[1:1 그림 주문서]','','■ AI 그림 프롬프트',prompt,'',
-      '■ 주문 정보','주문자: '+v('name'),'연락처: '+v('contact'),'상품: '+(prod?`${prod.name} (${prod.size})`:'-'),'금액: '+(prod?won(prod.price)+'원':'-'),'희망 수령일: '+(v('date')||'-'),canvas?'배송지: '+v('addr'):'',
+      '■ 주문 정보','주문자: '+v('name'),'연락처: '+v('contact'),'상품: '+(prod?`${prod.name} (${prod.size}) + 작품 캡션 2장`:'-'),'금액: '+(prod?won(prod.price)+'원':'-'),'희망 수령일: '+(v('date')||'-'),canvas?'배송지: '+v('addr'):'',
       '','(참고 사진이 있다면 이 메일에 첨부해 주세요)'].filter((x,i,a)=>x!==''||a[i-1]!=='').join('\n');
     return {prompt,subject:`[그림 주문] ${v('name')}님 · ${v('who')}`,body};
   }
