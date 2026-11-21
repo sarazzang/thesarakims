@@ -20,6 +20,9 @@ const WORKS=[
   {t:'정체', en:'停滯', k:'jeongche', type:'contest', contest:'제28회 말 사진·AI 이미지 공모전 출품작 · 한국마사회', meta:'2026 · AI-generated image',
    lead:'광화문에서 일을 마치고 돌아가던 저녁, 세종대로는 꽉 막혀 있었다. 이 길은 원래 말이 달리던 길이었을 텐데.',
    desc:'빽빽한 차량 격자 한가운데 아스팔트를 걷어낸 흙 한 줌을 남겼다. 흙은 포장된 도시 아래 아직 남아 있는 옛길이고, 그 위에 선 흰 말은 그 길의 원래 주인이다. 말은 달리지도, 비켜서지도 않고 그저 제자리에 서 있다. 모든 것이 멈춘 순간에야 비로소 눈에 들어오는 존재처럼.'},
+  {t:'White, Within', k:'white', type:'commission', client:'1:1 주문 제작', meta:'2026 · 27.3 × 22.0 cm · AI-generated image, print on canvas',
+   lead:'겨울의 빛 아래, 가장 안쪽에 온기를 품은 백동백.<br>조용하고 쉽게 다가가기 어려워 보이지만, 그 안에는 오래도록 사랑을 지켜내는 따뜻한 마음이 있다.',
+   desc:'A white camellia holds its warmth at the quiet center of winter. She may seem reserved and difficult to approach at first, yet within her lives a tender heart that keeps love for a long time. This work was made for someone who knows how to love deeply, with the hope that she, too, will be loved and cherished for a long time.'},
   {t:'Christian Barbershop', k:'ctb', type:'commission', client:'크리스천 바버샵 의뢰', meta:'2026 · 53.0 × 72.7 cm · AI-generated image, print on canvas',
    lead:'가장 낮은 곳에서 시작된 선.<br>그 선은 꺾이지 않고, 조용히 빛의 자리에 닿는다.',
    desc:'From the darkest ground, a single line rises without bending and becomes a cross. As it climbs, the green slowly grows clearer. This painting is about a place built on a new beginning.'}
@@ -32,7 +35,7 @@ const SONGS=[
   {t:'보내줘야만 하는 너', kind:'Single', v:'y8MJMHDhiqc'},
   {t:'넌 참 웃기는 남자야', kind:'Single', v:'cLx6YLEMLsU'}
 ];
-const SIZES={cat:[1100,880],seoul:[1100,1375],manwon:[1100,619],crowd:[880,1100],rain:[1100,733],iassc:[821,1100],jeongche:[1100,733],ctb:[825,1100]};
+const SIZES={white:[886,1100],cat:[1100,880],seoul:[1100,1375],manwon:[1100,619],crowd:[880,1100],rain:[1100,733],iassc:[821,1100],jeongche:[1100,733],ctb:[825,1100]};
 
 /* 크기별 가격 — 여기 숫자만 바꾸면 갤러리 페이지 전체에 반영됩니다
    원가 참고(갤러리피플 타임특가, 2026-11): 3호 19,800 / 6호 29,800 / 10호 44,800 / 20호 72,800 / 30호 118,000
